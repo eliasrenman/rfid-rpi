@@ -43,7 +43,7 @@ After correctly doing the previous steps you can now start with the software by 
 
 `git clone https://github.com/Abborren/rfid-rpi`
 
-`cd dir rfid-rpi`
+`cd rfid-rpi`
 
 After entering the directory copy the .env.example to .env.
 
