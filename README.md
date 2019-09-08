@@ -1,5 +1,5 @@
 # RFID PI
-#### WARNING This repository is W.I.P and all features of the program does not work proceed at your own risk!
+#### WARNING This repository is W.I.P and not all the features of the program work proceed at your own risk!
 
 Physical check in and out system written to work with [Yogster's](https://github.com/Yogsther) rest api and web interface
 
