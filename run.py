@@ -26,7 +26,7 @@ class Reader:
                 if self.debounce(card_id):
                     req.handle_req(card_id)
                 else:
-                    sleep(3)
+                    sleep(1)
         except KeyboardInterrupt:
             if not Util.debug_input():
                 self.GPIO.cleanup()
