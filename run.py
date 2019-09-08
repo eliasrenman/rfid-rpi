@@ -104,14 +104,17 @@ class HttpRequest:
         Util.print(response)
         response_json = json.loads(response)
 
+        self.controller.process()
+
         if response_json["success"]:
             if response_json["check_in"]:
                 self.controller.check_in()
             else:
                 self.controller.check_out()
+
         else:
             self.controller.error()
-        self.controller.process()
+
 
 
 class GPIOController:
@@ -134,21 +137,24 @@ class GPIOController:
             self.GPIO.output(1, self.GPIO.HIGH)
 
     def check_in(self):
-        self.blink_output(0, 2, 0.3)
+        self.blink_output(0, 1, 0.5)
 
     def check_out(self):
-        self.blink_output(0, 2, 0.3)
+        self.blink_output(0, 1, 0.5)
 
     def error(self):
-        self.blink_output(0, 2, 0.3)
+        self.blink_output(0, 3, 0.3)
 
     def blink_output(self, pin, amount, timeout):
-
+        counter = 1
         for i in range(amount):
             self.GPIO.output(pin, self.GPIO.HIGH)
             sleep(timeout)
             self.GPIO.output(pin, self.GPIO.LOW)
             sleep(timeout)
+            if amount != counter:
+                sleep(timeout)
+            counter += 1
 
 
 class DebugGPIOController(GPIOController):
@@ -174,11 +180,15 @@ class DebugGPIOController(GPIOController):
         super().error()
 
     def blink_output(self, pin, amount, timeout):
+        counter = 1
         for i in range(amount):
-            Util.print("blinking on" + pin)
+            Util.print("blinking on pin: " + str(pin))
             sleep(timeout)
-            Util.print("blinking off" + pin)
-            sleep(timeout)
+            Util.print("Timeout lasted: " + str(timeout) + " seconds")
+            Util.print("blinking off pin: " + str(pin))
+            if amount != counter:
+                sleep(timeout)
+            counter += 1
 
 
 class Util:
