@@ -28,7 +28,7 @@ brick your Raspberry or components so proceed at your own risk.
 ## Wiring
 Turn off your Rpi and connect the cables according to the picture and schematics.
 
-####Warning! These schematics currently don't include wiring for the LEDS
+#### Warning! These schematics currently don't include wiring for the LEDS
 
 ![visual image](https://raw.githubusercontent.com/Abborren/rfid-rpi/master/images/visual.png)
 
