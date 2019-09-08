@@ -22,9 +22,11 @@ class Reader:
         try:
             while True:
                 card_id = self.read()
-                Util.print("ID: %s\n" % card_id)
+                Util.print("Card ID: %s\n" % card_id)
                 if self.debounce(card_id):
                     req.handle_req(card_id)
+                else:
+                    sleep(3)
         except KeyboardInterrupt:
             if not Util.debug_input():
                 self.GPIO.cleanup()
@@ -38,11 +40,14 @@ class Reader:
         return reader.read_id()
 
     def debounce(self, card_id):
+
         if card_id != self.last_card_id:
+            Util.print("Card id is not the same")
             self.update_last(card_id)
             return True
         else:
-            if self.last_interaction_timestamp + 10 > int(round(time())):
+            if self.last_interaction_timestamp + 15 < int(round(time())):
+                Util.print("Card id is the same but time elapsed is over the limit")
                 self.update_last(card_id)
                 return True
             else:
