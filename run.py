@@ -77,7 +77,9 @@ class HttpRequest:
 
     def handle_req(self, card_id):
         self.controller.process()
-        response = HttpRequest.send_request(card_id)
+        response = (HttpRequest.send_request(card_id),
+                    '{"success":true,"check_in":true,"write":false,"reason":"Invalid token"}')[Util.debug_input()]
+
         self.handle_response(response)
 
     @staticmethod
@@ -120,7 +122,6 @@ class HttpRequest:
 
         else:
             self.controller.error()
-
 
 class GPIOController:
 
