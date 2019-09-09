@@ -88,7 +88,7 @@ class HttpRequest:
         payload = "token=" + os.getenv("TOKEN") + "&" \
             "card=" + str(card_id) + "&" \
             "timestamp=" + str(current_time)
-
+        Util.print(payload)
         headers = {
             'Content-Type': "application/x-www-form-urlencoded",
             'User-Agent': "PostmanRuntime/7.16.3",
