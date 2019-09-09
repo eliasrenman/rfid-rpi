@@ -123,6 +123,7 @@ class HttpRequest:
         else:
             self.controller.error()
 
+
 class GPIOController:
 
     def __init__(self):
@@ -137,12 +138,13 @@ class GPIOController:
         self.processing = False
 
     def process(self):
+        pins = self.pins
         if self.processing:
             self.processing = False
-            self.GPIO.output(1, self.GPIO.LOW)
+            self.GPIO.output(pins["process"], self.GPIO.LOW)
         else:
             self.processing = True
-            self.GPIO.output(1, self.GPIO.HIGH)
+            self.GPIO.output(pins["process"], self.GPIO.HIGH)
 
     def write_success(self):
         pins = self.pins
