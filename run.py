@@ -110,8 +110,9 @@ class HttpRequest:
         response_json = json.loads(response)
 
         self.controller.process()
-
-        if response_json["success"]:
+        if response_json["write"]:
+            self.controller.write_success()
+        elif response_json["success"]:
             if response_json["check_in"]:
                 self.controller.check_in()
             else:
@@ -140,22 +141,25 @@ class GPIOController:
         else:
             self.processing = True
             self.GPIO.output(1, self.GPIO.HIGH)
-
+    def write_success(self):
+        self.blink_output([0,1,2,3],3, 0.5)
     def check_in(self):
-        self.blink_output(0, 1, 0.5)
+        self.blink_output([0], 1, 0.5)
 
     def check_out(self):
-        self.blink_output(0, 1, 0.5)
+        self.blink_output([0], 1, 0.5)
 
     def error(self):
-        self.blink_output(0, 3, 0.3)
+        self.blink_output([0], 3, 0.3)
 
-    def blink_output(self, pin, amount, timeout):
+    def blink_output(self, pins, amount, timeout):
         counter = 1
         for i in range(amount):
-            self.GPIO.output(pin, self.GPIO.HIGH)
+            for pin in pins:
+                self.GPIO.output(pin, self.GPIO.HIGH)
             sleep(timeout)
-            self.GPIO.output(pin, self.GPIO.LOW)
+            for pin in pins:
+                self.GPIO.output(pin, self.GPIO.LOW)
             sleep(timeout)
             if amount != counter:
                 sleep(timeout)
@@ -171,6 +175,9 @@ class DebugGPIOController(GPIOController):
         else:
             self.processing = True
             Util.print("Proccesing LED on")
+    def write_success(self):
+        Util.print("write successfully triggerd")
+        super().write_success()
 
     def check_in(self):
         Util.print("check in triggered")
@@ -184,15 +191,19 @@ class DebugGPIOController(GPIOController):
         Util.print("error triggered")
         super().error()
 
-    def blink_output(self, pin, amount, timeout):
+    def blink_output(self, pins, amount, timeout):
         counter = 1
         for i in range(amount):
-            Util.print("blinking on pin: " + str(pin))
+            for pin in pins:
+                Util.print("blinking on pin: " + str(pin))
             sleep(timeout)
             Util.print("Timeout lasted: " + str(timeout) + " seconds")
-            Util.print("blinking off pin: " + str(pin))
+            for pin in pins:
+                Util.print("blinking off pin: " + str(pin))
             if amount != counter:
                 sleep(timeout)
+                Util.print("Timeout lasted: " + str(timeout) + " seconds")
+
             counter += 1
 
 
