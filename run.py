@@ -223,6 +223,10 @@ class Util:
         return os.getenv("DEBUG_INPUT") == "true"
 
     @staticmethod
+    def debug_response():
+        return os.getenv("DEBUG_response") == "true"
+
+    @staticmethod
     def print(_str):
         if os.getenv("CONSOLE_PRINT") == "true":
             print(_str)
