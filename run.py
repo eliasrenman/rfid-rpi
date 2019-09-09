@@ -122,7 +122,6 @@ class HttpRequest:
             self.controller.error()
 
 
-
 class GPIOController:
 
     def __init__(self):
@@ -133,6 +132,7 @@ class GPIOController:
             GPIO.setup(18, GPIO.OUT)
             self.GPIO = GPIO
         self.processing = False
+        self.pins = {"error": 14, "process": 15, "check_in": 18, "check_out": 23, "buzzer": 24}
 
     def process(self):
         if self.processing:
@@ -141,16 +141,22 @@ class GPIOController:
         else:
             self.processing = True
             self.GPIO.output(1, self.GPIO.HIGH)
+
     def write_success(self):
-        self.blink_output([0,1,2,3],3, 0.5)
+        pins = self.pins
+        self.blink_output([pins["process"], pins["check_in"], pins["check_out"], pins["buzzer"]], 3, 0.5)
+
     def check_in(self):
-        self.blink_output([0], 1, 0.5)
+        pins = self.pins
+        self.blink_output([pins["check_in"], pins["buzzer"]], 1, 0.5)
 
     def check_out(self):
-        self.blink_output([0], 1, 0.5)
+        pins = self.pins
+        self.blink_output([pins["check_out"], pins["buzzer"]], 1, 0.5)
 
     def error(self):
-        self.blink_output([0], 3, 0.3)
+        pins = self.pins
+        self.blink_output([pins["error"], pins["buzzer"]], 3, 0.3)
 
     def blink_output(self, pins, amount, timeout):
         counter = 1
@@ -175,6 +181,7 @@ class DebugGPIOController(GPIOController):
         else:
             self.processing = True
             Util.print("Proccesing LED on")
+
     def write_success(self):
         Util.print("write successfully triggerd")
         super().write_success()
@@ -215,7 +222,7 @@ class Util:
     @staticmethod
     def debug_input():
         return os.getenv("DEBUG_INPUT") == "true"
-    
+
     @staticmethod
     def print(_str):
         if os.getenv("CONSOLE_PRINT") == "true":
