@@ -62,12 +62,7 @@ class DebugReader(Reader):
 
     def read(self):
         input('write anything to run:')
-        return DebugReader.get_random_cid()
-
-    @staticmethod
-    def get_random_cid():
-        import random
-        return random.randint(1, 100000000)
+        return 1
 
 
 class HttpRequest:
@@ -78,7 +73,7 @@ class HttpRequest:
     def handle_req(self, card_id):
         self.controller.process()
         response = (HttpRequest.send_request(card_id),
-                    '{"success":true,"check_in":true,"write":false,"reason":"Invalid token"}')[Util.debug_input()]
+                    os.getenv("RESPONSE_AJAX"))[Util.debug_input()]
 
         self.handle_response(response)
 
