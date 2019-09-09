@@ -125,14 +125,15 @@ class HttpRequest:
 class GPIOController:
 
     def __init__(self):
+        self.pins = {"error": 14, "process": 15, "check_in": 18, "check_out": 23, "buzzer": 24}
         if os.getenv("DEBUG_OUTPUT") != "true":
             import RPi.GPIO as GPIO
             GPIO.setmode(GPIO.BCM)
             GPIO.setwarnings(False)
-            GPIO.setup(18, GPIO.OUT)
+            for keys, pin in self.pins.items():
+                GPIO.setup(pin, GPIO.OUT)
             self.GPIO = GPIO
         self.processing = False
-        self.pins = {"error": 14, "process": 15, "check_in": 18, "check_out": 23, "buzzer": 24}
 
     def process(self):
         if self.processing:
