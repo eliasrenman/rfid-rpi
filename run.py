@@ -148,15 +148,15 @@ class GPIOController:
 
     def check_in(self):
         pins = self.pins
-        self.blink_output([pins["check_in"], pins["buzzer"]], 3, 0.5)
+        self.blink_output([pins["check_in"], pins["buzzer"]], 1, 1.5)
 
     def check_out(self):
         pins = self.pins
-        self.blink_output([pins["check_out"], pins["buzzer"]], 3, 0.5)
+        self.blink_output([pins["check_out"], pins["buzzer"]], 1, 1.5)
 
     def error(self):
         pins = self.pins
-        self.blink_output([pins["error"], pins["buzzer"]], 4, 0.5)
+        self.blink_output([pins["error"], pins["buzzer"]], 3, 0.5)
 
     def blink_output(self, pins, amount, timeout):
         counter = 1
