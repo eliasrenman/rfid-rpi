@@ -111,7 +111,7 @@ class HttpRequest:
         if response_json["success"]:
             if response_json["write"]:
                 self.controller.write_success()
-            if response_json["check_in"]:
+            elif response_json["check_in"]:
                 self.controller.check_in()
             else:
                 self.controller.check_out()
