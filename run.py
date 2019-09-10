@@ -167,10 +167,9 @@ class GPIOController:
             for pin in pins:
                 self.GPIO.output(pin, self.GPIO.LOW)
             sleep(timeout)
-            counter += 1
             if amount != counter:
                 sleep(timeout)
-
+            counter += 1
 
 class DebugGPIOController(GPIOController):
 
@@ -210,10 +209,9 @@ class DebugGPIOController(GPIOController):
             if amount != counter:
                 sleep(timeout)
                 Util.print("Timeout lasted: " + str(timeout) + " seconds")
-
             counter += 1
 
-
+        
 class Util:
     @staticmethod
     def debug_output():
