@@ -166,7 +166,6 @@ class GPIOController:
             sleep(timeout)
             for pin in pins:
                 self.GPIO.output(pin, self.GPIO.LOW)
-            sleep(timeout)
             if amount != counter:
                 sleep(timeout)
             counter += 1
