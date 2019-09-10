@@ -107,9 +107,10 @@ class HttpRequest:
         response_json = json.loads(response)
 
         self.controller.process()
-        if response_json["write"]:
-            self.controller.write_success()
-        elif response_json["success"]:
+        
+        if response_json["success"]:
+            if response_json["write"]:
+                self.controller.write_success()
             if response_json["check_in"]:
                 self.controller.check_in()
             else:
