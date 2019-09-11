@@ -14,7 +14,7 @@ Physical check in and out system written to work with [Yogster's](https://github
 - Python 3.7 or newer
 - Python3 pip
 - SSH (Optional but recommended)
-- git
+- Git
 - SPI needs to be enabled ([guide](https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial/all#spi-on-pi))
 ## Python dependencies
 - [SimpleMFRC522](https://github.com/pimylifeup/MFRC522-python)
