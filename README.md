@@ -1,5 +1,5 @@
 # RFID PI
-#### WARNING This repository is W.I.P and not all the features of the program work proceed at your own risk!
+#### WARNING This repository is W.I.P. Proceed at your own risk!
 
 Physical check in and out system written to work with [Yogster's](https://github.com/Yogsther) rest api and web interface
 
@@ -23,7 +23,7 @@ Physical check in and out system written to work with [Yogster's](https://github
 - [dotenv](https://github.com/theskumar/python-dotenv)
 # Installation
 Before using this program make sure that the GPIO pins are correctly wired as incorrectly wired components *CAN* 
-brick your Raspberry or components so proceed at your own risk.
+brick your Raspberry pi and or components so proceed at your own risk.
 
 ## Wiring
 Turn off your Rpi and connect the cables according to the picture and schematics.
@@ -57,6 +57,9 @@ PORT=443            # Should preferably be 443 for https
 DEBUG_INPUT=true    # This is used when debugging the program without a RPI or rfid reader
 DEBUG_OUTPUT=true   # This is used to console log output instead of blinking leds
 CONSOLE_PRINT=true  # This enables or disables console printing
+# RESPONSE DEBUGGING
+DEBUG_RESPONSE=true
+RESPONSE_AJAX='{"success":true,"check_in":true,"write":false,"reason":"Invalid token"}'
 ```
 
 If all the wiring is correct, spi is enabled and all the python dependencies are installed the program should be ready to run.
