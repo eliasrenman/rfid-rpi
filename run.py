@@ -46,7 +46,7 @@ class Reader:
             self.update_last(card_id)
             return True
         else:
-            if self.last_interaction_timestamp + 7 < int(round(time())):
+            if self.last_interaction_timestamp + 4 < int(round(time())):
                 Util.print("Card id is the same but time elapsed is over the limit")
                 self.update_last(card_id)
                 return True
